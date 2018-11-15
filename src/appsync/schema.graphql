@@ -110,7 +110,7 @@ type Pros implements Entity {
 
 type Query {
 	listContent: [Content!]!
-	getContent(id: ID!): Content
+	getContent(id: ID!, type: String): Content
 	getContentByPath(path: String!): Content
 	getArticleById(id: ID!): Article
 	getGalleryById(id: ID!): [Gallery]
