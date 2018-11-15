@@ -1,0 +1,139 @@
+service: sp-gql-mock
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  # Ireland.
+  region: "eu-west-1"
+  memorySize: 128
+  # Lambda timeout in seconds.
+  timeout: 2
+  logRetentionInDays: 1
+
+plugins:
+  - serverless-webpack
+  - serverless-plugin-warmup
+  - serverless-appsync-plugin
+
+custom:
+  webpack:
+    webpackConfig: ./webpack/${self:provider.stage}.config.js
+    webpackIncludeModules: true
+    packager: 'yarn'
+    includeModules:
+      forceExclude:
+        - aws-sdk
+  appSync:
+    name: sp-gql-mock-appsync-api
+    authenticationType: API_KEY
+    schema: src/appsync/schema.graphql
+    serviceRole: AppSyncServiceRole
+    mappingTemplatesLocation: src/appsync/mapping-templates
+    mappingTemplates:
+      - dataSource: GQLMockSingleContent
+        type: Query
+        field: getContent
+        request: "_common/lambda-proxy-request.vtl"
+        response: "_common/lambda-proxy-response.vtl"
+      - dataSource: GQLMockSingleContent
+        type: Query
+        field: getContentByPath
+        request: "_common/lambda-proxy-request.vtl"
+        response: "_common/lambda-proxy-response.vtl"
+      - dataSource: GQLMockListContent
+        type: Query
+        field: listContent
+        request: "_common/lambda-proxy-request.vtl"
+        response: "_common/lambda-proxy-response.vtl"
+      - dataSource: GQLMockSingleArticle
+        type: Query
+        field: getArticleById
+        request: "_common/lambda-proxy-request.vtl"
+        response: "_common/lambda-proxy-response.vtl"
+      - dataSource: GQLMockGallery
+        type: Query
+        field: getGalleryById
+        request: "_common/lambda-proxy-request.vtl"
+        response: "_common/lambda-proxy-response.vtl"
+      - dataSource: GQLMockTerm
+        type: Query
+        field: getTermById
+        request: "_common/lambda-proxy-request.vtl"
+        response: "_common/lambda-proxy-response.vtl"
+    dataSources:
+      - type: AWS_LAMBDA
+        name: GQLMockSingleContent
+        config:
+          lambdaFunctionArn:
+            Fn::GetAtt: [ GQLMockSingleContentLambdaFunction, Arn ]
+          serviceRoleArn:
+            Fn::GetAtt: [ AppSyncServiceRole, Arn ]
+      - type: AWS_LAMBDA
+        name: GQLMockListContent
+        config:
+          lambdaFunctionArn:
+            Fn::GetAtt: [ GQLMockListContentLambdaFunction, Arn ]
+          serviceRoleArn:
+            Fn::GetAtt: [ AppSyncServiceRole, Arn ]
+      - type: AWS_LAMBDA
+        name: GQLMockSingleArticle
+        config:
+          lambdaFunctionArn:
+            Fn::GetAtt: [ GQLMockSingleArticleLambdaFunction, Arn ]
+          serviceRoleArn:
+            Fn::GetAtt: [ AppSyncServiceRole, Arn ]
+      - type: AWS_LAMBDA
+        name: GQLMockGallery
+        config:
+          lambdaFunctionArn:
+            Fn::GetAtt: [ GQLMockGalleryLambdaFunction, Arn ]
+          serviceRoleArn:
+            Fn::GetAtt: [ AppSyncServiceRole, Arn ]
+      - type: AWS_LAMBDA
+        name: GQLMockTerm
+        config:
+          lambdaFunctionArn:
+            Fn::GetAtt: [ GQLMockTermLambdaFunction, Arn ]
+          serviceRoleArn:
+            Fn::GetAtt: [ AppSyncServiceRole, Arn ]
+package:
+  individually: true
+
+functions:
+  GQLMockSingleContent:
+    handler: src/lambda/appsync/data-sources/GQLMockSingleContent.handler
+  GQLMockListContent:
+    handler: src/lambda/appsync/data-sources/GQLMockListContent.handler
+  GQLMockSingleArticle:
+    handler: src/lambda/appsync/data-sources/GQLMockSingleArticle.handler
+  GQLMockGallery:
+    handler: src/lambda/appsync/data-sources/GQLMockGallery.handler
+  GQLMockTerm: 
+    handler: src/lambda/appsync/data-sources/GQLMockTerm.handler
+
+resources:
+  Resources:
+    AppSyncServiceRole:
+      Type: "AWS::IAM::Role"
+      Properties:
+        RoleName: sp-gql-mock--${self:provider.stage}--appsync-role
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service:
+                  - "appsync.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          -
+            PolicyName: "AppSyncServiceRole-Policy"
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: "Allow"
+                  Action:
+                    - "lambda:invokeFunction"
+                  Resource:
+                    - "arn:aws:lambda:${self:provider.region}:*:function:*"

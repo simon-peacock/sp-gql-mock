@@ -1,0 +1,18 @@
+type Article {
+	author: [Author]
+	category: [Term]
+	channel: Term
+	last_updated: String!
+	path: String!
+	promote: Boolean!
+	publication_date: String!
+	seo_title: String!
+	status: Boolean!
+	sticky: Boolean!
+	title: String!
+	type: String!
+	id: ID!
+	text: String
+	images: [Gallery]
+	rating: Rating
+}

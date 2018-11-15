@@ -1,0 +1,151 @@
+type Advert implements Entity {
+	id: ID!
+	type: String!
+	value: String!
+}
+
+type Article {
+	author: [User]
+	category: [Term]
+	channel: Term
+	last_updated: String!
+	path: String!
+	promote: Boolean!
+	publication_date: String!
+	seo_title: String!
+	status: Boolean!
+	sticky: Boolean!
+	title: String!
+	type: String!
+	id: ID!
+	text: String
+	images: [Gallery]
+	rating: Rating
+}
+
+type ArticleGroup implements Entity {
+	id: ID!
+	type: String!
+	links: [Link!]!
+}
+
+type ArticleList implements Entity {
+	id: ID!
+	type: String!
+}
+
+
+type Cons implements Entity {
+	id: ID!
+	type: String!
+	value: String!
+}
+
+type Content implements Entity {
+	id: ID!
+	title: String!
+	# Type: Review, Article etc
+	type: String!
+	text: String
+	image: String
+	path: String
+}
+
+interface Entity {
+	id: ID!
+}
+
+type Gallery implements Entity {
+	id: ID!
+	name: String!
+	type: String!
+	image: [Image!]!
+}
+
+type Image implements Entity {
+	id: ID!
+	type: String!
+	name: String!
+	path: String!
+}
+
+type Link implements Entity {
+	id: ID!
+	type: String!
+	name: String
+	path: String!
+}
+
+type Menu implements Entity {
+	id: ID!
+	type: String!
+	menu_item: [MenuItem!]!
+}
+
+type MenuItem implements Entity {
+	id: ID!
+	type: String!
+	title: String!
+	description: String
+	menu_name: String
+	parent: String
+	path: String!
+	enabled: Boolean!
+}
+
+type Price implements Entity {
+	id: ID!
+	type: String!
+	label: String
+	min: String
+	max: String
+}
+
+type Pros implements Entity {
+	id: ID!
+	value: String!
+	type: String!
+}
+
+type Query {
+	listContent: [Content!]!
+	getContent(id: ID!, type: String): Content
+	getContentByPath(path: String!): Content
+	getArticleById(id: ID!): Article
+	getGalleryById(id: ID!): [Gallery]
+	getTermById(id: ID!): Term
+}
+
+type Rating implements Entity {
+	id: ID!
+	label: String
+	value: String!
+	primary: Boolean
+	type: String!
+}
+
+type Term implements Entity {
+	id: ID!
+	type: String!
+	vocabulary: String!
+	path: String
+	name: String!
+}
+
+type Text implements Entity {
+	id: ID!
+	value: String!
+	type: String!
+}
+
+type User implements Entity {
+	id: ID!
+	name: String!
+	email: String
+	type: String!
+}
+
+schema {
+    query:Query
+}
+
