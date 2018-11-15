@@ -35,6 +35,7 @@ type ArticleList implements Entity {
 }
 
 
+
 type Cons implements Entity {
 	id: ID!
 	type: String!
@@ -109,7 +110,7 @@ type Pros implements Entity {
 
 type Query {
 	listContent: [Content!]!
-	getContent(id: ID!, type: String): Content
+	getContent(id: ID!): Content
 	getContentByPath(path: String!): Content
 	getArticleById(id: ID!): Article
 	getGalleryById(id: ID!): [Gallery]
@@ -141,7 +142,7 @@ type Text implements Entity {
 type User implements Entity {
 	id: ID!
 	name: String!
-	email: String
+	email: String!
 	type: String!
 }
 
