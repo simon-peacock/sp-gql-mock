@@ -54,7 +54,6 @@ exports.handler = async (event) => {
     }
   ];
 
-
   
   if (event.id === "1") {
     obj = {

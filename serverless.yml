@@ -55,6 +55,11 @@ custom:
         field: getTermById
         request: "_common/lambda-proxy-request.vtl"
         response: "_common/lambda-proxy-response.vtl"
+      - dataSource: GQLMockMenu
+        type: Query
+        field: getMenu
+        request: "_common/lambda-proxy-request.vtl"
+        response: "_common/lambda-proxy-response.vtl"
     dataSources:
       - type: AWS_LAMBDA
         name: GQLMockSingleContent
@@ -84,6 +89,13 @@ custom:
             Fn::GetAtt: [ GQLMockTermLambdaFunction, Arn ]
           serviceRoleArn:
             Fn::GetAtt: [ AppSyncServiceRole, Arn ]
+      - type: AWS_LAMBDA
+        name: GQLMockMenu
+        config:
+          lambdaFunctionArn:
+            Fn::GetAtt: [ GQLMockMenuLambdaFunction, Arn ]
+          serviceRoleArn:
+            Fn::GetAtt: [ AppSyncServiceRole, Arn ]
 package:
   individually: true
 
@@ -96,6 +108,8 @@ functions:
     handler: src/lambda/appsync/data-sources/GQLMockGallery.handler
   GQLMockTerm: 
     handler: src/lambda/appsync/data-sources/GQLMockTerm.handler
+  GQLMockMenu: 
+    handler: src/lambda/appsync/data-sources/GQLMockMenu.handler
 
 resources:
   Resources:

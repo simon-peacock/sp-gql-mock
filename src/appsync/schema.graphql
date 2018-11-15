@@ -5,15 +5,10 @@ type Advert implements Entity {
 }
 
 
-type CpontentGroup implements Entity {
+type ContentGroup implements Entity {
 	id: ID!
 	type: String!
 	links: [Link!]!
-}
-
-type ContentList implements Entity {
-	id: ID!
-	type: String!
 }
 
 
@@ -104,6 +99,7 @@ type Query {
 	getContentByPath(path: String!): Content
 	getGalleryById(id: ID!): [Gallery]
 	getTermById(id: ID!): Term
+	getMenu(id: ID!) Menu
 }
 
 type Rating implements Entity {
