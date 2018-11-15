@@ -6,50 +6,118 @@ exports.handler = async (event) => {
   var list = [];
 
 
+  var channel = {
+    id: 1,
+    type: 'taxonomy',
+    path: 'taxonomy/term/2',
+    name: 'Reviews'
+  }
+
+  var category = [
+    {
+      id: 1,
+      type: 'taxonomy',
+      path: 'taxonomy/term/6',
+      name: 'Cars'
+    }, 
+    {
+      id: 1,
+      type: 'taxonomy',
+      path: 'taxonomy/term/7',
+      name: 'Vans'
+    }
+  ];
+
+
 
   var item1 = {
+    author: [],
+    category: category,
+    channel: channel,
+    last_updated: '1478422920',
+    path: 'article-1',
+    promote: true,
+    publication_date: '1478422920',
+    sticky: true,
     id: 'd3cdc682-cf58-4bfa-934b-c9d468a4d7ba',
-    title: 'List content 1',
+    title: 'Test Article 1',
+    seo_title: 'Test SEO Article 1',
+    status: true,
     type: 'article',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Senectus et netus et malesuada fames ac turpis egestas. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus pretium quam vulputate dignissim suspendisse in est ante. Vestibulum sed arcu non odio euismod. Cras tincidunt lobortis feugiat vivamus at. Erat imperdiet sed euismod nisi porta lorem mollis. Volutpat consequat mauris nunc congue nisi vitae. Purus sit amet volutpat consequat mauris. Sit amet justo donec enim diam vulputate ut pharetra. Urna condimentum mattis pellentesque id nibh tortor id aliquet. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada.',
-    image: 'https://placeimg.com/640/480/animals?t=1541075867450',
-    path: 'list-content',
+    text: 'This is a test article 1',
+    images:[]
   };
 
   var item2 = {
+    author: [],
+    category: category,
+    channel: channel,
+    last_updated: '1478422920',
+    path: 'article-2',
+    promote: true,
+    publication_date: '1478422920',
+    sticky: true,
     id: 'd3cdc682-cf58-4bfa-934b-c9d468a4d7ba',
-    title: 'List content 2',
+    title: 'Test Article 2',
+    seo_title: 'Test SEO Article 2',
+    status: true,
     type: 'article',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Senectus et netus et malesuada fames ac turpis egestas. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus pretium quam vulputate dignissim suspendisse in est ante. Vestibulum sed arcu non odio euismod. Cras tincidunt lobortis feugiat vivamus at. Erat imperdiet sed euismod nisi porta lorem mollis. Volutpat consequat mauris nunc congue nisi vitae. Purus sit amet volutpat consequat mauris. Sit amet justo donec enim diam vulputate ut pharetra. Urna condimentum mattis pellentesque id nibh tortor id aliquet. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada.',
-    image: 'https://placeimg.com/640/480/animals?t=1541075867450',
-    path: 'list-content',
+    text: 'This is a test article 2',
+    images:[]
   };
 
   var item3 = {
+    author: [],
+    category: category,
+    channel: channel,
+    last_updated: '1478422920',
+    path: 'article-3',
+    promote: true,
+    publication_date: '1478422920',
+    sticky: true,
     id: 'd3cdc682-cf58-4bfa-934b-c9d468a4d7ba',
-    title: 'List content 3',
+    title: 'Test Article 3',
+    seo_title: 'Test SEO Article 3',
+    status: true,
     type: 'article',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Senectus et netus et malesuada fames ac turpis egestas. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus pretium quam vulputate dignissim suspendisse in est ante. Vestibulum sed arcu non odio euismod. Cras tincidunt lobortis feugiat vivamus at. Erat imperdiet sed euismod nisi porta lorem mollis. Volutpat consequat mauris nunc congue nisi vitae. Purus sit amet volutpat consequat mauris. Sit amet justo donec enim diam vulputate ut pharetra. Urna condimentum mattis pellentesque id nibh tortor id aliquet. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada.',
-    image: 'https://placeimg.com/640/480/animals?t=1541075867450',
-    path: 'list-content',
+    text: 'This is a test article 1',
+    images:[]
   };
 
   var item4 = {
+    author: [],
+    category: category,
+    channel: channel,
+    last_updated: '1478422920',
+    path: 'article-4',
+    promote: true,
+    publication_date: '1478422920',
+    sticky: true,
     id: 'd3cdc682-cf58-4bfa-934b-c9d468a4d7ba',
-    title: 'List content 4 ',
+    title: 'Test Article 4',
+    seo_title: 'Test SEO Article 4',
+    status: true,
     type: 'article',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Senectus et netus et malesuada fames ac turpis egestas. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus pretium quam vulputate dignissim suspendisse in est ante. Vestibulum sed arcu non odio euismod. Cras tincidunt lobortis feugiat vivamus at. Erat imperdiet sed euismod nisi porta lorem mollis. Volutpat consequat mauris nunc congue nisi vitae. Purus sit amet volutpat consequat mauris. Sit amet justo donec enim diam vulputate ut pharetra. Urna condimentum mattis pellentesque id nibh tortor id aliquet. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada.',
-    image: 'https://placeimg.com/640/480/animals?t=1541075867450',
-    path: 'list-content',
+    text: 'This is a test article 4',
+    images:[]
   };
 
   var item5 = {
+    author: [],
+    category: category,
+    channel: channel,
+    last_updated: '1478422920',
+    path: 'article-5',
+    promote: true,
+    publication_date: '1478422920',
+    sticky: true,
     id: 'd3cdc682-cf58-4bfa-934b-c9d468a4d7ba',
-    title: 'List content 5',
+    title: 'Test Article 5',
+    seo_title: 'Test SEO Article 5',
+    status: true,
     type: 'article',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Senectus et netus et malesuada fames ac turpis egestas. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus pretium quam vulputate dignissim suspendisse in est ante. Vestibulum sed arcu non odio euismod. Cras tincidunt lobortis feugiat vivamus at. Erat imperdiet sed euismod nisi porta lorem mollis. Volutpat consequat mauris nunc congue nisi vitae. Purus sit amet volutpat consequat mauris. Sit amet justo donec enim diam vulputate ut pharetra. Urna condimentum mattis pellentesque id nibh tortor id aliquet. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada.',
-    image: 'https://placeimg.com/640/480/animals?t=1541075867450',
-    path: 'list-content',
+    text: 'This is a test article 5',
+    images:[]
   };
 
 

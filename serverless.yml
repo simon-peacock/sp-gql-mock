@@ -45,11 +45,6 @@ custom:
         field: listContent
         request: "_common/lambda-proxy-request.vtl"
         response: "_common/lambda-proxy-response.vtl"
-      - dataSource: GQLMockSingleArticle
-        type: Query
-        field: getArticleById
-        request: "_common/lambda-proxy-request.vtl"
-        response: "_common/lambda-proxy-response.vtl"
       - dataSource: GQLMockGallery
         type: Query
         field: getGalleryById
@@ -76,13 +71,6 @@ custom:
           serviceRoleArn:
             Fn::GetAtt: [ AppSyncServiceRole, Arn ]
       - type: AWS_LAMBDA
-        name: GQLMockSingleArticle
-        config:
-          lambdaFunctionArn:
-            Fn::GetAtt: [ GQLMockSingleArticleLambdaFunction, Arn ]
-          serviceRoleArn:
-            Fn::GetAtt: [ AppSyncServiceRole, Arn ]
-      - type: AWS_LAMBDA
         name: GQLMockGallery
         config:
           lambdaFunctionArn:
@@ -104,8 +92,6 @@ functions:
     handler: src/lambda/appsync/data-sources/GQLMockSingleContent.handler
   GQLMockListContent:
     handler: src/lambda/appsync/data-sources/GQLMockListContent.handler
-  GQLMockSingleArticle:
-    handler: src/lambda/appsync/data-sources/GQLMockSingleArticle.handler
   GQLMockGallery:
     handler: src/lambda/appsync/data-sources/GQLMockGallery.handler
   GQLMockTerm: 

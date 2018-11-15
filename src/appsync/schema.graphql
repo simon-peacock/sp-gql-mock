@@ -4,7 +4,26 @@ type Advert implements Entity {
 	value: String!
 }
 
-type Article {
+
+type CpontentGroup implements Entity {
+	id: ID!
+	type: String!
+	links: [Link!]!
+}
+
+type ContentList implements Entity {
+	id: ID!
+	type: String!
+}
+
+
+type Cons implements Entity {
+	id: ID!
+	type: String!
+	value: String!
+}
+
+type Content implements Entity {
 	author: [User]
 	category: [Term]
 	channel: Term
@@ -21,35 +40,6 @@ type Article {
 	text: String
 	images: [Gallery]
 	rating: Rating
-}
-
-type ArticleGroup implements Entity {
-	id: ID!
-	type: String!
-	links: [Link!]!
-}
-
-type ArticleList implements Entity {
-	id: ID!
-	type: String!
-}
-
-
-
-type Cons implements Entity {
-	id: ID!
-	type: String!
-	value: String!
-}
-
-type Content implements Entity {
-	id: ID!
-	title: String!
-	# Type: Review, Article etc
-	type: String!
-	text: String
-	image: String
-	path: String
 }
 
 interface Entity {
@@ -112,7 +102,6 @@ type Query {
 	listContent: [Content!]!
 	getContent(id: ID!, type: String): Content
 	getContentByPath(path: String!): Content
-	getArticleById(id: ID!): Article
 	getGalleryById(id: ID!): [Gallery]
 	getTermById(id: ID!): Term
 }
@@ -149,4 +138,6 @@ type User implements Entity {
 schema {
     query:Query
 }
+
+
 
