@@ -26,20 +26,35 @@ type Content implements Entity {
 	path: String!
 	promote: Boolean!
 	publication_date: String!
-	seo_title: String!
+	seo_title: SeoTitle!
 	status: Boolean!
 	sticky: Boolean!
-	title: String!
+	title: Title!
 	type: String!
 	id: ID!
-	text: String
+	text: [Text]
 	images: [Gallery]
 	rating: Rating
+	pros: Pros
+	cons: Cons
 }
 
 interface Entity {
 	id: ID!
 }
+
+type Title implements Entity {
+	id: ID!
+	value: String!
+	type: String!
+}
+
+type SeoTitle implements Entity {
+	id: ID!
+	value: String!
+	type: String!
+}
+
 
 type Gallery implements Entity {
 	id: ID!

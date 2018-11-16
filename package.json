@@ -4,6 +4,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
+    "merge-schemas": "cat ./src/appsync/schemas/*.graphql > ./src/appsync/schema.graphql",
     "test": "npm run lint",
     "start": "sls offline",
     "build": "sls webpack",
@@ -38,7 +39,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
-    "graphql-import": "^0.7.1",
+    "gql-merge": "0.0.6",
+    "merge-graphql-schemas": "1.5.8",
     "serverless": "^1.33.0",
     "serverless-appsync-plugin": "^1.0.5",
     "serverless-offline": "^3.31.0",
@@ -51,6 +53,7 @@
     "yarn": "^1.12.1"
   },
   "devDependencies": {
-    "graphql-import-loader": "^0.2.1"
+    "gql-merge": "0.0.6",
+    "babel-core": "^6.26.0"
   }
 }
